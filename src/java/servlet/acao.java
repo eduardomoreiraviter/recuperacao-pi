@@ -4,7 +4,10 @@
  */
 package servlet;
 
+import dao.LivrosDAO;
 import dao.UsuarioDAO;
+import entidade.Livros;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -90,12 +93,39 @@ public class acao extends HttpServlet {
         //
         if (new UsuarioDAO().autenticar(descricao, autor)) {
             //avisa que deu certo
-            response.sendRedirect("sucesso.jsp");
+            //response.sendRedirect("sucesso.jsp");
+            request.setAttribute("xxx", 1); //nao vou usar, isso é um exemplo
+            encaminharPagina("sucesso.jsp", request, response);
         } else {
             //avisa que deu errado
-            response.sendRedirect("erro.jsp");
+            encaminharPagina("erro.jsp", request, response);
         }
 
+        //----------------------------------------------------------------
+        String a = request.getParameter("a");
+        if (a.equals("salvarCateg")) {
+            String Id = request.getParameter("id");
+            String Titulo = request.getParameter("titulo");
+            String Autor = request.getParameter("autor");
+            String Descricao = request.getParameter("descricao");
+            String Publicacao = request.getParameter("publicacao");
+            String Avaliacao = request.getParameter("avaliacao");
+
+            Livros livros = new Livros();
+            //livros.setId(Integer.parseInt(id));
+            livros.setTitulo(titulo);
+            livros.setAutor(autor);
+            livros.setDescricao(descricao);
+            livros.setPublicacai(publicacao);
+            livros.setAvaliacao(avaliacao);
+
+            if (new LivrosDAO().salvar(livros)) {
+                encaminharPagina("sucesso.jsp", request, response);
+            } else {
+                encaminharPagina("erro.jsp", request, response);
+            }
+
+        }
     }
 
     /**
@@ -108,4 +138,13 @@ public class acao extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void encaminharPagina(String pagina, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher(pagina);
+            rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println("erro no encaminhamento: " + e);
+        }
+
+    }
 }
