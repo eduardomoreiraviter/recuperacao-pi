@@ -45,11 +45,12 @@
             }
         </style>
     </head>
+                <%@include file="menu.jsp" %>
     <body>
-
+        
         <!-- <form action="paginadois.jsp" method="post"> -->
         <form action="acao?a=salvarCateg" method="post">    
-            
+
             <label for="id">ID:</label>
             <input type="text" id="id" name="id">
 
@@ -69,8 +70,9 @@
             <input type="number" id="avaliacao" name="avaliacao" min="1" max="5">
 
             <input type="submit" name="salvar" value="Enviar">
-            
+
         </form>
 
     </body>
+    
 </html>
