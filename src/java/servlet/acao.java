@@ -61,6 +61,30 @@ public class acao extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         System.out.println("estou no GET.");
+
+        String a = request.getParameter("a");
+        
+        if (a.equals("editarCateg")) {
+            String id = request.getParameter("id");
+            int codigo = Integer.parseInt(id);
+
+            Livros livros = new LivrosDAO().consultar(codigo);
+
+            request.setAttribute("livros", livros);
+
+            encaminharPagina("livros.jsp", request, response);
+        }
+        
+        if (a.equals("excluirCateg")){
+            String id = request.getParameter("id");
+            int codigo = Integer.parseInt(id);
+            if (new LivrosDAO().excluir(codigo)){
+                encaminharPagina("sucesso.jsp", request, response);
+            } else {
+                encaminharPagina("erro.jsp", request, response);
+            }
+        }
+
     }
 
     /**
@@ -104,7 +128,7 @@ public class acao extends HttpServlet {
         //----------------------------------------------------------------
         String a = request.getParameter("a");
         if (a.equals("salvarCateg")) {
-            String Id = request.getParameter("id");
+            String ID = request.getParameter("id");
             String Titulo = request.getParameter("titulo");
             String Autor = request.getParameter("autor");
             String Descricao = request.getParameter("descricao");
@@ -112,19 +136,27 @@ public class acao extends HttpServlet {
             String Avaliacao = request.getParameter("avaliacao");
 
             Livros livros = new Livros();
-            //livros.setId(Integer.parseInt(id));
+            int codigo = Integer.parseInt(ID);
+            livros.setId(codigo);
             livros.setTitulo(titulo);
             livros.setAutor(autor);
             livros.setDescricao(descricao);
             livros.setPublicacai(publicacao);
             livros.setAvaliacao(avaliacao);
 
-            if (new LivrosDAO().salvar(livros)) {
-                encaminharPagina("sucesso.jsp", request, response);
+            if (codigo == 0) {
+                if (new LivrosDAO().salvar(livros)) {
+                    encaminharPagina("livros.jsp", request, response);
+                } else {
+                    encaminharPagina("erro.jsp", request, response);
+                }
             } else {
-                encaminharPagina("erro.jsp", request, response);
+                if (new LivrosDAO().atualizar(livros)) {
+                    encaminharPagina("livros.jsp", request, response);
+                } else {
+                    encaminharPagina("erro.jsp", request, response);
+                }
             }
-
         }
     }
 

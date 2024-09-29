@@ -9,12 +9,13 @@
             <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/web/paginadois.jsp</file>
             <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/src/java/apoio/db.properties</file>
             <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/src/java/apoio/ConexaoBD.java</file>
-            <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/web/erro.jsp</file>
-            <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/web/sucesso.jsp</file>
-            <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/src/java/dao/UsuarioDAO.java</file>
             <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/src/java/dao/LivrosDAO.java</file>
             <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/src/java/entidade/Livros.java</file>
             <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/src/java/servlet/acao.java</file>
+            <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/web/menu.jsp</file>
+            <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/web/erro.jsp</file>
+            <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/web/sucesso.jsp</file>
+            <file>file:/C:/Users/Eduardo/Desktop/EMV/ADS/p-int/recuperação/recuperacao/src/java/dao/UsuarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

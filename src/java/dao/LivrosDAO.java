@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author Eduardo
  */
 public class LivrosDAO {
-
+    //salvar
     public boolean salvar(Livros c) {
 
         try {
@@ -41,11 +41,41 @@ public class LivrosDAO {
             return false;
         }
     }
-    
+
+    //consultar um
+    public Livros consultar(int codigo) {
+        Livros livros = new Livros();
+
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = ""
+                    + "select * from livros "
+                    + "where "
+                    + "id = " + codigo;
+
+            System.out.println("SQL:" + sql);
+
+            ResultSet resultado = st.executeQuery(sql);
+
+            resultado.next();
+            livros.setId(resultado.getInt("id"));
+            livros.setTitulo(resultado.getString("titulo"));
+            livros.setAutor(resultado.getString("autor"));
+            livros.setDescricao(resultado.getString("descricao"));
+            livros.setPublicacai(resultado.getString("publicacai"));
+            livros.setAvaliacao(resultado.getString("avaliacao"));
+
+        } catch (Exception e) {
+            System.out.println("Erro ao CONSULTAR UM LIVRO:" + e);
+        }
+        return livros;
+    }
+
     //consultar todos
-    public ArrayList consultar (){
+    public ArrayList consultar() {
         ArrayList<Livros> livros = new ArrayList<>();
-        
+
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
@@ -54,28 +84,25 @@ public class LivrosDAO {
 
             System.out.println("SQL:" + sql);
 
-            ResultSet resultado =  st.executeQuery(sql);
-            
-            while(resultado.next()){
+            ResultSet resultado = st.executeQuery(sql);
+
+            while (resultado.next()) {
                 Livros l = new Livros();
                 l.setId(resultado.getInt("id"));
                 l.setTitulo(resultado.getString("titulo"));
                 l.setAutor(resultado.getString("autor"));
-                l.setDescricao(resultado.getString("descrição"));
+                l.setDescricao(resultado.getString("descricao"));
                 l.setPublicacai(resultado.getString("publicacai"));
-                l.setAvaliacao(resultado.getString("avaliação"));
-                
+                l.setAvaliacao(resultado.getString("avaliacao"));
+
                 livros.add(l);
             }
-            
         } catch (Exception e) {
             System.out.println("Erro ao CONSULTAR LIVROS:" + e);
-            
         }
-           
         return livros;
-    } 
-    
+    }
+    //excluir
     public boolean excluir(int parametro) {
 
         try {
@@ -96,9 +123,9 @@ public class LivrosDAO {
             return false;
         }
     }
-    
+    //atualizar
     public boolean atualizar(Livros c) {
-
+              
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
@@ -107,10 +134,10 @@ public class LivrosDAO {
                     + "set "
                     + "titulo = '" + c.getTitulo() + "', "
                     + "autor = '" + c.getAutor() + "', "
-                    + "descrição = '" + c.getDescricao() + "',"
+                    + "descricao = '" + c.getDescricao() + "',"
                     + "publicacai = '" + c.getPublicacai() + "', "
-                    + "avaliação = '" + c.getAvaliacao() + "', "
-                    + "where id = '" + c.getId();
+                    + "avaliacao = " + c.getAvaliacao() + " "
+                    + "where id = " + c.getId();
 
             System.out.println("SQL:" + sql);
 
@@ -121,5 +148,5 @@ public class LivrosDAO {
             System.out.println("Erro ao ATUALIZAR LIVROS:" + e);
             return false;
         }
-    }    
+    }
 }
